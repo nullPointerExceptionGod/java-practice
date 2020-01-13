@@ -9,29 +9,35 @@ import java.util.List;
 public class Laboratory {
 
 	public static void main(String[] args) {
-		
-		lambdaExpressions();
-		
+
+		methodReference();
+
 	}
-	
+
+	/*
+	 * DEFAULT METHODS
+	 */
 	private static void defaultMethod() {
 		// anonymous object
 		Formula formula = new Formula() {
-			
+
 			@Override
 			public double calculate(double num) {
 				// sqrt is a default method in the same interface
 				return (sqrt(num) + 2);
 			}
 		};
-		
+
 		System.out.println(formula.calculate(9));
 		System.out.println(formula.sqrt(16));
-		
-		//TODO: try to understand this output -> java8.Laboratory$1
+
+		// TODO: try to understand this output -> java8.Laboratory$1
 		System.out.println(formula.getClass());
 	}
-	
+
+	/*
+	 * LAMBDA EXPRESSIONS
+	 */
 	private static void lambdaExpressions() {
 		
 		// Java 7 -> with anonymous comparator
@@ -84,7 +90,35 @@ public class Laboratory {
 		
 		System.out.println("\n##############");
 		
-		//List<Double> specialNumbers = Arrays.asList(a)
+		List<Double> specialNumbers = Arrays.asList(2d, 1d, 40585d, 145d);
+
+		// shortest way
+		Collections.sort(specialNumbers, (specialNumber1, specialNumber2) -> specialNumber1.compareTo(specialNumber2));
+		
+		for(Double specialNumber : specialNumbers) {
+			System.out.println(specialNumber);
+		}
+		
 	}
+
+	/*
+	 * FUNCTIONAL INTERFACES
+	 */
+	public static void functionalInterfaces() {
+		
+		Converter<String, Integer> converter = (from) -> Integer.valueOf(from);
+		
+		Integer converted = converter.convert("123");
+		
+		System.out.println(converted);
+	}
+	
+	/*
+	 * METHOD AND CONSTRUCTOR REFERENCES
+	 */
+	public static void methodReference() {
+		
+	}
+	
 
 }
