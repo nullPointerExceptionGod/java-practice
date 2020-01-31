@@ -1,6 +1,5 @@
 package java8;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,7 +9,7 @@ public class Laboratory {
 
 	public static void main(String[] args) {
 
-		methodReference();
+		objectMethodReference();
 
 	}
 
@@ -116,9 +115,26 @@ public class Laboratory {
 	/*
 	 * METHOD AND CONSTRUCTOR REFERENCES
 	 */
-	public static void methodReference() {
-		
+	public static void staticMethodReference() {
+		Converter<String, Integer> converter = Integer::valueOf;
+		Integer converted = converter.convert("123");
+		System.out.println("Converted: " + converted);
+		System.out.println("Type of converted: " + converted.getClass());
+	}
+
+	public static void objectMethodReference() {
+		Something something = new Something();
+		Converter<String, String> converter = something::startsWith;
+		String converted = converter.convert("Java");
+		System.out.println(converted);
+	}
+
+	public static void constructorMethodReference() {
+		PersonFactory<Person> personFactory = Person::new;
+		Person person = personFactory.create("Peter", "Parker");
 	}
 	
+
+}
 
 }
