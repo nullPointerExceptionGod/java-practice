@@ -133,8 +133,12 @@ public class Laboratory {
 		PersonFactory<Person> personFactory = Person::new;
 		Person person = personFactory.create("Peter", "Parker");
 	}
-	
 
-}
+	/*
+	 * LAMBDA SCOPES
+	 */
+	public static void lambdaScopes() {
+
+	}
 
 }
