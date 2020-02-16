@@ -1,4 +1,4 @@
-package java8;
+package java8.general;
 
 public interface PersonFactory<P extends Person> {
 

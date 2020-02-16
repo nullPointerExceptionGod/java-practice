@@ -1,4 +1,4 @@
-package java8;
+package java8.general;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -11,7 +11,7 @@ public class Laboratory {
 
 	public static void main(String[] args) {
 
-		parallelStreams();
+		maps();
 
 	}
 
@@ -32,7 +32,7 @@ public class Laboratory {
 		System.out.println(formula.calculate(9));
 		System.out.println(formula.sqrt(16));
 
-		// TODO: try to understand this output -> java8.Laboratory$1
+		// TODO: try to understand this output -> java8.general.Laboratory$1
 		System.out.println(formula.getClass());
 	}
 
@@ -369,6 +369,46 @@ public class Laboratory {
 		long t3 = System.nanoTime();
 		long millis2 = TimeUnit.NANOSECONDS.toMillis(t3 - t2);
 		System.out.println(String.format("parallel sort took: %d ms", millis2));
+	}
+
+	/*
+	 * MAP
+	 *
+	 * maps don't support streams
+	 * Instead maps now support various new and useful methods for doing common tasks
+	 */
+	public static void maps() {
+		Map<Integer, String> map = new HashMap<>();
+		for(int i = 0; i < 10; i++) {
+			map.putIfAbsent(i, "val" + i);
+		}
+
+		map.forEach((key, val) -> System.out.println(val));
+
+		// compute
+		map.computeIfPresent(3, (num, val) -> val + num);
+		map.get(3);             // val33
+		map.computeIfPresent(9, (num, val) -> null);
+		map.containsKey(9);     // false
+		map.computeIfAbsent(23, num -> "val" + num);
+		map.containsKey(23);    // true
+		map.computeIfAbsent(3, num -> "bam");
+		map.get(3);             // val33
+
+		// Remove
+		map.remove(3, "val3");
+		map.get(3);             // val33
+		map.remove(3, "val33");
+		map.get(3);             // null
+
+		// Get or default
+		map.getOrDefault(42, "not found");  // not found
+
+		// merge
+		map.merge(9, "val9", (value, newValue) -> value.concat(newValue));
+		map.get(9);             // val9
+		map.merge(9, "concat", (value, newValue) -> value.concat(newValue));
+		map.get(9);             // val9concat
 	}
 
 
